@@ -1,72 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>головна сторінка</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Магазин АТБ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1 class="text-center">привіт козаки та козачки</h1>
-    <h2 style="text-align: center;"> командос</h2>
-
-        <div class="container">
+    <h1 class="text-center">Головна сторінка</h1>
+    <div class="container">
         <div class="row">
-            <div class=" offset-md-3 col-md-6">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text"
-                    name="name"
-                    class="form-control"
-                    id="name"/>
-                </div>
+            <div class="offset-3 col-6">
+                <form class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="LastName" class="form-label">Прізвище</label>
+                        <input type="text" class="form-control" id="LastName" required>
+                        <div class="invalid-feedback">
+                            Вкажіть прізвище користувача
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">Last name</label>
-                    <input type="text"
-                    name="last_name"
-                    class="form-control"
-                    id="last_name"/>
-                </div>
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Ім'я</label>
+                        <input type="text" class="form-control" id="Name" required>
+                        <div class="invalid-feedback">
+                            Вкажіть ім'я користувача
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input type="text"
-                    name="phone"
-                    class="form-control"
-                    id="phone"/>
-                </div>
-
-                <button type="submit"
-                id="mybutton"
-                class="btn btn-success">Нажми мене</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-
         </div>
     </div>
 
-
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        var btn = document.getElementById("mybutton");
-        btn.onclick = function() {
-            const name = document.getElementById("name").value;
-            const lastname = document.getElementById("last_name").value;
-            const phone = document.getElementById("phone").value;
-            // console.log("username", name);
-            // console.log("last_name", lastname);
-            // console.log("phone", phone);
-            alert(`вітаємо у нашому порталі! ${lastname} ${name} -- ${phone}`);
-        }
-        console.log("mybutton", btn);
+
+        // console.log("наш JavaScript");
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        // отримуємо список елементів які мають клас .needs-validation
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        // перебираю усі форми і починаю на них перехоплювати подію submit - віправка форми
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+
+                event.preventDefault(); //запитання стандарту поведінку форму
+            }, false)
+        })
+
     </script>
 
-    <!-- підтягуємо код js зовнішнього файлу -->
-    <!-- <script src="/my-js/one.js"> -->
-    <script>
-
-    </script>
 </body>
+
 </html>
