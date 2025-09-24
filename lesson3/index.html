@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get reguest</title>
+    <!-- підключення до bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
 
 </head>
 
 <body>
+    <!-- створення класу з данними користувача -->
     <h1>привіт js</h1>
-
     <table class="table">
         <thead>
             <tr>
@@ -21,12 +22,71 @@
                 <th scope="col"></th>
             </tr>
         </thead>
+        <!-- групує тег юзерів -->
         <tbody id="listUsers">
-            
+
         </tbody>
     </table>
+    <!-- підключення JavaScript-бібліотеки для перевірки запитів -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"></script>
 
     <script>
+        //посилає запит
+        const requestUsers = async () => {
+            try {
+                const url = "https://lohika.itstep.click/api/Users/all";
+                //зберігає результат що повертає axios
+                const response = await axios.get(url)
+
+                //звертаємося до першого юзера
+                //const user1 = response.data[0]
+
+                //тест
+                // console.log("result server", response);
+                // console.log("user1", user1);
+
+                //вивід списку юзерів в консолі
+                const users = response.data;
+                // console.log("Users", users);
+                const n = users.length;
+
+                //звертання до таблиці
+                const listUsers = document.getElementById("listUsers");
+
+                //візуалізація кожного юзера
+                for (let i = 0; i < n; i++)
+                {
+                    console.log("user", users[i]);
+                    const urlImage = `https://lohika.itstep.click/images/400_${users[i].photo}`;
+                    // console.log("images", urlImage);
+                    
+                    listUsers.innerHTML +=
+                    `
+            <tr>
+                <th scope="row">${users[i].id}</th>
+                <td>${users[i].secondName} ${users[i].firstName}</td>
+                <td>
+                    <img src="${urlImage}"
+                        width="75"
+                        alt="фото користувача">
+                </td>
+                <td></td>
+            </tr
+                    `;
+                }
+            }
+            //у разі помилки у запиті викликає повідомлення
+            catch (problem) {
+                console.log("Хюстон у нас проблеми!", problem)
+            }
+        }
+    </script>
+
+    <script>
+        //викликаємо функцію, яка посилає запит
+        requestUsers();
+        //const зберігає змінну данних користувачів (об.єктів)
+        //об'єкт — це основний будівельний блок в коді
         const listBears = [
             {
                 id: 1,
@@ -40,11 +100,16 @@
                 image: "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg"
             }
         ];
-        const n=listBears.length;
+        //об.єкт в консолі
+        console.log("List Bears", listBears);
+        const n = listBears.length;
         const listUsers = document.getElementById("listUsers")
-        for(let i=0; i<n;i++)
-        {
-            listUsers.innerHTML += 
+        //цикл вивід списку користувачів
+        // for - масив
+        for (let i = 0; i < n; i++) {
+            //вміст html
+            listUsers.innerHTML +=
+                //`` - виражає оператори, присвоює
                 `
             <tr>
                 <th scope="row">${listBears[i].id}</th>
