@@ -18,8 +18,10 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Password</th>
                 <th scope="col">Image</th>
-                <th scope="col"></th>
+                <th scope="col">Email</th>
             </tr>
         </thead>
         <!-- групує тег юзерів -->
@@ -65,10 +67,13 @@
             <tr>
                 <th scope="row">${users[i].id}</th>
                 <td>${users[i].secondName} ${users[i].firstName}</td>
+                <td>${listBears[i].phone}</td>
+                <td>${listBears[i].password}</td>
                 <td>
                     <img src="${urlImage}"
                         width="75"
                         alt="фото користувача">
+                <td>${listBears[i].email}</td>
                 </td>
                 <td></td>
             </tr
@@ -91,13 +96,19 @@
             {
                 id: 1,
                 name: "Петро Миколайович",
-                image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                phone: "0973336789",
+                password: "aboba",
+                image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
+                email: "ww@ll"
             },
 
             {
                 id: 2,
                 name: "Махмут",
-                image: "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg"
+                phone: "0976783497",
+                password: "skebob",
+                image: "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+                email: "ww@ww"
             }
         ];
         //об.єкт в консолі
@@ -114,12 +125,14 @@
             <tr>
                 <th scope="row">${listBears[i].id}</th>
                 <td>${listBears[i].name}</td>
+                <td>${listBears[i].phone}</td>
+                <td>${listBears[i].password}</td>
                 <td>
                     <img src="${listBears[i].image}"
                         width="75"
                         alt="фото користувача">
+                <td>${listBears[i].email}</td>
                 </td>
-                <td>@mdo</td>
             </tr>
                 `;
         }
