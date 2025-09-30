@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робота з промісами</title>
+</head>
+<body>
+    <h1>Використання промісів</h1>
+
+    <script>
+        //проміс - асинхрон метод який повертає два стани
+        //reject - помилка
+        //resolve - задача виконана успішно і ми можемо отримати результат
+        //проміс - робота вашої програми
+        //проміс приймає вказівник на функцію
+        //
+        let myPromise = new Promise(function(resolve, reject)
+        {
+            //проміс завжди має повертати
+            setTimeout(() => {
+                resolve("я добрався до хати. це успіх");
+            },2000)
+            
+            setTimeout(() => {
+                resolve("я стикнувся із стовпом. провальна робота");
+            },1500)
+        });
+
+        //щоб працювіати з промісом ми маємо визвати його методи
+        //можна використовувати async та await
+        //можна використовувати then та catch
+        //console.log("--початок роботи нашого промісу--");
+        // myPromise
+        //     .then(result => {
+        //         console.log("проміс успішно завершив роботу", result);
+        //     })
+        //     .catch(problem => {
+        //         console.log("у програмі трапилася помилка", problem);
+        //     });
+        // console.log("---робота коду іде далі---")
+
+        //асинхрона функція
+        const myWorker = async () => {
+            try {
+                const result = await myPromise;
+                console.log("проміс успішно завершив роботу", result);
+            }
+            catch(problem) {
+                console.log("у програмі трапилася помилка", problem);
+            }
+        }
+        myWorker();
+    </script>
+</body>
+</html>
