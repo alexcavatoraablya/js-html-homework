@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>фото з промісами</title>
+</head>
+
+<body>
+    <div id="gallery"></div>
+
+    <script>
+        // Проміс — це асинхронний метод, який має 2 стани:
+        // reject — відхилено (помилка), можна отримати повідомлення про помилку
+        // resolve — виконано успішно, можна отримати результат
+        // Проміс — це якась робота вашої програми
+        // Проміс приймає функцію з двома параметрами: resolve і reject
+
+        let myPromise = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve("Я добрався до хати. Це успіх!");
+            }, 2000);
+
+            setTimeout(() => {
+                reject("Стикнувся із стовпом (Негативна робота)");
+            }, 2500);
+        });
+
+        myPromise
+            .then(result => {
+                console.log("Успіх!", result);
+            })
+            .catch(problem => {
+                console.log("Помилка", problem);
+            });
+
+
+        const myWorker = async () => {
+            try {
+                const result = await myPromise;
+                console.log("Успіх!", result);
+            } catch (problem) {
+                console.log("Помилка!", problem);
+            }
+        };
+
+        myWorker();
+    </script>
+
+    <script>
+
+        let photos = [
+            "https://media.istockphoto.com/id/996288992/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B2%D0%B8%D1%80%D0%B4%D0%B6%D0%B8%D0%BD%D0%B8%D1%8F-%D0%BE%D0%BF%D0%BE%D1%81%D1%81%D1%83%D0%BC-%D0%B4%D0%B8%D0%B4%D0%B5%D0%BB%D1%8C%D1%84%D0%B8%D1%81-%D0%B2%D0%B8%D1%80%D0%B4%D0%B6%D0%B8%D0%BD%D0%B8%D0%B0%D0%BD%D0%B0-%D0%BD%D0%B0-%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC.jpg?s=2048x2048&w=is&k=20&c=nazXQa6x8ECZs1VoRKrIh9Dht4Y6m4PWattoNe8X3a8=",
+            "https://media.istockphoto.com/id/145992459/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BE%D0%BF%D0%BE%D1%81%D1%81%D1%83%D0%BC-%D1%81-%D0%B4%D0%B5%D1%82%D0%B5%D0%B9.jpg?s=2048x2048&w=is&k=20&c=bhuYYG18GGsJz1QUphHo-029JV0xr-8IUUl_EXbnbKs="
+        ];
+
+
+        function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                let img = new Image();
+                img.src = url;
+
+                img.onload = () => resolve(img);
+                img.onerror = () => reject("Помилка!");
+            });
+        }
+
+        const showPhotos = async () => {
+            for (let i = 0; i < photos.length; i++) {
+                try {
+                    let image = await loadImage(photos[i]);
+                    document.getElementById("gallery").appendChild(image);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        };
+
+        showPhotos();
+    </script>
+</body>
+
+</html>
