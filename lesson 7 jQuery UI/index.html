@@ -21,12 +21,19 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
     <script src="js/datepicker-uk.js"></script>
+    <script src="js/datepicker-en.js"></script>
 
     <script>
         $(document).ready(() => {
             console.log("Document ready");
             $("#myDate").datepicker();
+        //     // $(".datepicker").datepicker($.TranslateService);
+        $("#locale").change(function() {
+            var selectedLang = $(this).val();
+            // Update the datepicker's language
+            $("#myDate").datepicker("option", $.datepicker.regional[selectedLang]);
         });
+    });
     </script>
 </body>
 </html>
