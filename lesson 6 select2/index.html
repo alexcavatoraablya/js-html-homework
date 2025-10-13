@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>привіт Select2</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Щоб працювала бібліотека select2 потрібно css та js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+</head>
+
+<body>
+    <h1>Select2 привіт</h1>
+    <h2>опг</h2>
+
+    <input type="text" id="myText" /> <input type="number" id="myNumber" /> <button id="btnMark">Додати</button>
+    <br />
+    <hr />
+
+    <select name="names" id="names">
+        <option value="1">Віктор</option>
+        <option value="2">Оксана</option>
+        <option value="3">Іван</option>
+    </select>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(() => {
+
+            $("#btnMark").on("click", () => {
+                const text = $("#myText").val();
+                console.log("click", text);
+
+            });
+            console.log("Document Ready");
+            $("#names").select2({
+                width: "200px"
+            });
+        });
+    </script>
+</body>
+
+</html>
