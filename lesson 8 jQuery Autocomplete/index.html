@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Autocomplete</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <h1>привіт jQuery</h1>
+    <input type="text" id="search">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+
+    <script>
+        //'' та "" не має різниці
+        $(document).ready(() => {
+            //let і var
+            for(let i = 0; i < 5; i++){
+                var number = i+1; //var доступний за межами for
+                console.log("hi " + number);
+            }
+            // console.log("привіт");
+            let items = [
+                "Віктор",
+                "Вова",
+                "Марина",
+                "Сергій",
+            ];
+            $("#search").autocomplete({
+                source: items
+            });
+
+            
+        });
+    </script>
+
+</body>
+</html>

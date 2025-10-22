@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>робота з web storage</title>
+</head>
+
+<body>
+    <h1>робота з web storage</h1>
+    <!-- інпут для ведення данних з клавіатури -->
+    <input id="password"></input>
+    <input id="email"></input>
+
+    <!-- кнопка для збереження данних -->
+    <button id="addLocalStorage">Додати у LocalStorage</button>
+    <!-- <button id="readLocalStorage">Прочитати дані з LocalStorage</button> -->
+
+    <script>
+        //масив який зберігає дані
+        const user = {
+            password: "4658834",
+            email: "dd@ww"
+        };
+        //за допомогою json зберігаємо об'єкт
+        localStorage.setItem("user", JSON.stringify(user));
+
+
+        const addLocalStorage = document.getElementById("addLocalStorage");
+        addLocalStorage.addEventListener("click", () => {
+            // console.log("add event click");
+            localStorage.password = password;
+            localStorage.email = email;
+        });
+        //console.log("Вітаємо Вас перший раз.")
+
+        // const readLocalStorage = document.getElementById("readLocalStorage");
+        // readLocalStorage.addEventListener("click", () => {
+        //     alert(localStorage.name);
+        // });
+    </script>
+</body>
+
+</html>
