@@ -24,7 +24,7 @@
             email: "dd@ww"
         };
         //за допомогою json зберігаємо об'єкт
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem('userData', JSON.stringify(user));
 
 
         const addLocalStorage = document.getElementById("addLocalStorage");
@@ -32,6 +32,7 @@
             // console.log("add event click");
             localStorage.password = password;
             localStorage.email = email;
+            console.log("Вітаємо Вас перший раз.")
         });
         //console.log("Вітаємо Вас перший раз.")
 
