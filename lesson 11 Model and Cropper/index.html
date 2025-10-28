@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Використання бібліотеки Cropper</title>
+    <link rel="stylesheet" href="/scripts/scripts/cropper.min.css">
+</head>
+
+<body>
+    <h1>то є cropperjs</h1>
+
+    <img src="/images/images.jpg" alt="моє фото" id="opossum" width="300">
+
+    <script src="/scripts/scripts/cropper.min.js"></script>
+    <button type="button" id="btnCrop">обрізати</button>
+    <input type="file" class="sr-only" id="inputSelectFile" name="image" accept="image/*">
+    
+    <div id="contentImage">
+
+    </div>
+
+    <div class="modal fade" id="happyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> -->
+                <div class="modal-body" id="modalBodyContent">
+
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+
+            var inputSelectFile = document.getElementById("inputSelectFile");
+            inputSelectFile.addEventListener("change", (e) => {
+                //ту знаходяться обрані файли
+                const file = e.target.files[0];
+                if(file) {
+                    //знищення попереднього файлу аби обрати новий 
+                    cropper.destroy();
+                    cropper = null;
+                    const mySelect = URL.createObjectURL(file);
+                    //присвоєння файлу
+                    document.getElementById("opossum").src = mySelect;
+                    cropper = new Cropper(image, {
+                        //форма як вирізати зображення
+                        aspectRatio: 1 / 1
+                    });
+
+                }
+                // console.log(file);
+            });
+            var croppedCanvas;
+
+            var image = document.querySelector('#opossum');
+            var cropper = new Cropper(image, {
+                aspectRatio: 1 / 1
+            });
+            //перевірка роботи кнопки
+            document.getElementById("btnCrop").addEventListener("click", () => {
+                console.log("ннннннн")
+                img = cropper.getCroppedCanvas().toDataURL();
+                let contentImage = document.getElementById("contentImage");
+                contentImage.innerHTML =
+                    `<img src="${img}" width = "200"/>`
+                //console.log("img", img);
+                // const image = document.getElementById("opossum").value;
+                //відкриття модального вікна із інпута в вікно
+                document.getElementById("modalBodyContent").image = userImage;
+                document.getElementById("openModalBtn").click();
+            });
+        });
+    </script>
+</body>
+
+</html>
