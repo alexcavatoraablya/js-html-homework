@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocomplete фільми</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+</head>
+<body>
+    <h1>Пошук фільмів</h1>
+    <input type="text" id="search" placeholder="Введіть назву фільму">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            console.log("Початок роботи autocomplete");
+
+            $("#search").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "https://www.omdbapi.com/",
+                        dataType: "json",
+                        data: {
+                            s: request.term,
+                            apikey: "69c255cc"
+                        },
+                        success: function(data) {
+                            if (data.Response === "True") {
+                                let titles = data.Search.map(f => f.Title);
+                                response(titles);
+                            } else {
+                                response([]); // якщо фільмів не знайдено
+                            }
+                        }
+                    });
+                },
+                minLength: 2
+            });
+        });
+    </script>
+</body>
+</html>
