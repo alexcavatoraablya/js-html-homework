@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Робота з об'єктами в js</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    </link>
+</head>
+
+<body>
+    <h1>Привіт козаки</h1>
+
+    <div class="container">
+        <form>
+            <div class="col-md-6 offset-md-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Телефон</label>
+                <input type="phone" class="form-control" id="phone">
+            </div>
+            <button type="submit" class="btn btn-primary">Реєструватися</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let victor = {
+            name: "victor",
+            age: 22
+        };
+        console.log("victor", victor);
+
+        // const myKeys = Object.keys(victor);
+        // console.log("myKeys", myKeys);
+
+        // for(let item of myKeys) {
+        //     console.log("Keys list", item);
+        // }
+
+        // const myValues = Object.values(victor);
+        // console.log("myValues", victor);
+
+        // const myEntries = Object.entries(victor);
+        // console.log("myEntries", myEntries);
+
+        // for(let item of myEntries) {
+        //     console.log("entrie", item);
+        // }
+
+        const errors = {
+            email: [
+                "Пошта не є коректною",
+                "Пошта вказано не коректною"
+            ],
+
+            phone: [
+                "Поле телефон є обов'язковим",
+                "Вкажіть правильний формат номеру +380(xxx)xx-xx-xxx"
+            ]
+        };
+
+        var listKeysError = Object.keys(errors);
+        for(let item of listKeysError) {
+            var errorItems = errors[item]; //список помилок з об'єктами
+            console.log("Items", errorItems);
+            //var errorsItems = errors.[item]
+            //console.log("Наші ключі", item);
+        }
+
+        //console.log("View errors", errors);
+
+    </script>
+</body>
+
+</html>
