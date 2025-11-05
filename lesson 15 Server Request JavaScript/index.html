@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Використання запитів на сервер</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Відправка запитів на сервер</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                </tr>
+            </thead>
+            <div id="listUsers"></div>
+        </table>
+    </div>
+
+    <script>
+        //сервер це адреса в інтернеті куди можна послати запит
+        const url = "https://jsonplaceholder.typicode.com/users";
+
+        // const requestServerFetch = async () => {
+        //     console.log("Begin Request");
+        //     try {
+                //відправити запит на сервер і отримали відповідь
+                // const response = await fetch(url);
+                let xhr = new XMLHttpRequest();
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // Обробка успішної відповіді
+                        const data = JSON.parse(xhr.responseText);
+                        const listElement = document.getElementById('listUsers');
+                        
+                        //створення елементу списку
+                        data.forEach(item => {
+                            //const listItem = document.createElement('div');
+                            listItem.textContent = item.id;
+                            listItem.textContent = item.name;
+                            listItem.textContent = item.email;
+                            listItem.textContent = item.address.street;
+                            listElement.appendChild(listItem);
+                        });
+                    } else {
+                        //обробка помилки
+                        console.error('Помилка запиту:', xhr.statusText);
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.error('Сталася мережева помилка');
+                };
+
+                xhr.open('GET', url, true);
+                xhr.send();
+
+
+
+                // console.log("response result", response);
+                // //читаємо у json format
+                // const users = await response.json(); //відповідь сервера
+                // console.log("server json", users);
+
+                // for (let i = 0; i < users.length; i++) {
+                //     console.log("user i", users[i])
+                //     var tr = `
+                //     <tr>
+                //         <td>${users[i].id}</td>
+                //         <td>${users[i].name}</td>
+                //         <td>${users[i].email}</td>
+                //         <td>${users[i].address.street}</td>
+                //     </tr>
+                //     `;
+                //     listUsers.innerHTML += tr;
+                //}
+
+            //}
+            // catch {
+
+            // }
+        //}
+
+        //requestServerFetch();
+
+        //console.log("привіт команда");
+    </script>
+</body>
+
+</html>
