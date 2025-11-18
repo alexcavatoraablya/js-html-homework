@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello oAuth</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card profile-card">
+            <div class="card-body text-center">
+                <img id="userImage" src="https://randomuser.me/api/portraits/men/52.jpg" alt="User Profile"
+                    class="rounded-circle profile-img mb-3">
+                <h3 class="card-title mb-2" id="fullName">John Doe</h3>
+                <p class="card-text text-muted mb-3" id="id">Web Developer</p>
+                <p class="card-text mb-4" id="description">Passionate about creating beautiful and functional websites. Always learning
+                    and
+                    exploring new technologies.</p>
+                <div class="social-icons mb-4">
+                    <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+                <a href="#" class="btn btn-primary btn-lg w-100">Connect</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieXlAeXkueXkiLCJpbWFnZSI6ImlrZmNsYnpwLml1NC53ZWJwIiwicm9sZXMiOiJ1c2VyIiwiZXhwIjoxODQ5ODU2MTA2fQ.kxTrQSaXaIwpZ0G2_Br8obS363ke5L-uhky6_vJSq6A";
+        const url = "https://lohika.itstep.click/api/Account/profile";
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("User info", data)
+                const imageUrl = `https://lohika.itstep.click/images/800_${data.photo}`;
+                console.log("image", data.photo);
+                fullName.textContent = data.secondName + " "+ data.firstName;
+                id.textContent = data.id
+                description.textContent = "Tel "+ data.phone + ". Email "+ data.email;
+                userImage.src=imageUrl;
+            })
+            .catch(error => console.error('Error:', error));
+
+        console.log("hello oAuth");
+    </script>
+</body>
+
+</html>
