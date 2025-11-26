@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Реєстрація користувача</h1>
+        <div class="offset-3 col-6">
+            <form class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Прізвище</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                    <div class="invalid-feedback">
+                        Вкажіть прізвище користувача
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Ім'я</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                    <div class="invalid-feedback">
+                        Вкажіть ім'я користувача
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Телефон</label>
+                    <input type="text" class="form-control" id="phone" required>
+                    <div class="invalid-feedback">
+                        Вкажіть телефон користувача
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Електронна пошта</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">
+                        Вкажіть електронна пошта користувача
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="password" required>
+                    <div class="invalid-feedback">
+                        Вкажіть пароль користувача
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Повтор пароля</label>
+                    <input type="password" class="form-control" id="confirmPassword" required>
+                    <div class="invalid-feedback">
+                        Вкажіть повторно пароль користувача
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <img src="https://www.shutterstock.com/image-vector/no-bear-sign-on-white-260nw-2168000361.jpg"
+                            style="width: 100%;" alt="Ваше фото" id="previewImage">
+                    </div>
+                    <div class="col-9">
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Фото</label>
+                            <input type="file" class="form-control" id="photo" accept="image/*" required>
+                            <div class="invalid-feedback">
+                                Оберіть фото користувача
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <span>Привіт я голодний!</span>
+                
+ -->
+                <button type="submit" class="btn btn-primary" id="registerBtn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const photo = document.getElementById("photo");
+    let base64 = ""; //зберігає base64 
+    //console.log("photo", photo);
+    photo.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (file) { //якщо було обрано файл
+            console.log("Ви обрали файл", file);
+            if (/^image\/\w+/.test(file.type)) {
+
+                document.getElementById("previewImage").src = URL.createObjectURL(file);
+                const reader = new FileReader();
+
+                reader.onload = function () {
+                    var result = reader.result;
+                    base64 = result; //зберігаємо base64
+                    //console.log("base64", result);
+                };
+
+                reader.readAsDataURL(file);
+            }
+            else {
+                alert("Оберіть файл фото :)");
+            }
+
+        }
+        else {
+            alert("Альо оберіть файл :)");
+        }
+        //console.log("Відбулася зміна в інпуті файл", file);
+    });
+
+    //console.log("register btn", registerBtn);
+    //event - обєкт події
+    registerBtn.addEventListener("click", (event) => {
+        event.preventDefault(); //відміняє стандартну поведінку
+
+        //виведення даних у консолі. value - властивість у JavaScript, яка отримує поточне значення поля введення у формі.
+        console.log("lastName", lastName.value);
+        console.log("firstName", firstName.value);
+        console.log("phone", phone.value);
+        console.log("email", email.value);
+        console.log("password", password.value);
+        console.log("confirmPassword", confirmPassword.value);
+        console.log("base64", base64);
+        //ці дані приймає сервер для реєстрації
+        const user = {
+            email: email.value,
+            firstName: firstName.value,
+            secondName: lastName.value,
+            photo: base64,
+            phone: phone.value,
+            password: password.value,
+            confirmPassword: confirmPassword.value
+        };
+        console.log("Реєстрація користувача: ", user);
+        //Починаємо спілкуватися зі сервером
+        //передаємо дані на сервер за допомогою посилання
+        axios.post("https://lohika.itstep.click/api/Account/register", user)
+            .then(response => {
+                //виводить отриманий токен у консолі
+                const token = response.data.token;
+                console.log("Дані від сервера", token); 
+                //token потрібен для аутентифікації та авторизації доступу до захищених ресурсів, наприклад, в API
+            })
+            //виводить помилку, якщо дані не введені або введені помилково
+            .catch(error => {
+                console.error("Сталася помилка", error);
+            })
+        //console.log("натиснути на кнопку реєстрацію");
+
+    });
+</script>
