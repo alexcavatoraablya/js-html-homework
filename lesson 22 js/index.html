@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєсьрація користувача</title>
+</head>
+
+<body>
+    <h1>Реєстрація користувача</h1>
+    <form>
+        <div>
+            <label for="firstName" class="form-label">Вкажіть Ваше ім'я</label>
+            <input type="text" id="firstName" name="firstName" />
+        </div>
+
+        <div>
+            <label for="lastName" class="form-label">Вкажіть Ваше прізвище</label>
+            <input type="text" id="lastName" />
+        </div>
+
+        <div>
+            <label for="email" class="form-label">Вкажіть Вашу електронну почту</label>
+            <input type="text" id="email" />
+        </div>
+    </form>
+
+    <button type="submit" value="register" id="btnRegister">Реєстрація</button>
+
+    <script>
+        const firstName = document.getElementById("firstName");
+        btnRegister.addEventListener("click", (event) => {
+            console.log(firstName.value);
+        });
+
+        const lastName = document.getElementById("lastName");
+        btnRegister.addEventListener("click", (event) => {
+            console.log(lastName.value);
+        });
+
+        const email = document.getElementById("email");
+        btnRegister.addEventListener("click", (event) => {
+            console.log(email.value);
+        });
+    </script>
+</body>
+
+</html>
